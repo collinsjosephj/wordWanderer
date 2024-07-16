@@ -1,11 +1,10 @@
-// Updated auth.js for GraphQL 
 const jwt = require('jsonwebtoken');
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
 
 module.exports = {
   authMiddleware: function ({ req }) {
-    let token = req.token || req.query.token || req.headers.authorization;
+    let token = req.body.token || req.query.token || req.headers.authorization;
 
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
@@ -20,9 +19,9 @@ module.exports = {
       req.user = data;
     } catch {
       console.log('Invalid token');
-      return req;
     }
 
+    return req;
   },
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
