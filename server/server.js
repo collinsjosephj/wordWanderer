@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
-const { authMiddleWare } = require('./utils/auth');
+const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 require('dotenv').config();
 
@@ -12,17 +12,20 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: authMiddleWare,
+  context: ({ req }) => {
+    const token = req.headers.authorization || '';
+    return { token };
+  },
 });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/dist')));
+  app.use(express.static(path.join(__dirname, '../client/build')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
   });
 }
 
