@@ -17,6 +17,7 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
+    "@apollo/server": "^4.10.4",
     "apollo-server-express": "^3.13.0",
     "bcrypt": "^5.1.1",
     "graphql": "^16.9.0",
