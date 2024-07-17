@@ -1,5 +1,8 @@
 # wordWanderer  ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+
+
+
 <img width="1918" alt="Screenshot 2024-07-17 at 02 46 40" src="https://github.com/user-attachments/assets/5cf70eea-204e-4187-9fb2-e04026f2bbc9">
 
 ## Overview
